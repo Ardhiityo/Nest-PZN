@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 @Controller('/api/users')
 export class UserController {
@@ -10,5 +10,18 @@ export class UserController {
     @Get('/sample')
     get() { //nama method bebas tidak harus post, atau get
         return 'GET';
+    }
+
+    @Get('/hello')
+    getHello(
+        @Query('first_name') first_name: string,
+        @Query('last_name') last_name: string
+    ) {
+        return `Hello ${first_name} ${last_name}`
+    }
+
+    @Get(':id')
+    getId(@Param('id') id: string) {
+        return `Id : ${id}`
     }
 }
